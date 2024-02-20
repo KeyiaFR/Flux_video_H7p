@@ -19,9 +19,9 @@
 
 
 
-![GitHub repo size](https://img.shields.io/github/repo-size/edgarnica/Flux_video_H7p?style=plastic)
+![GitHub repo size](https://img.shields.io/github/repo-size/KeyiaFR/Flux_video_H7p?style=plastic)
 
-  ![GitHub top language](https://img.shields.io/github/languages/top/edgarnica/Flux_video_H7p?style=plastic)
+  ![GitHub top language](https://img.shields.io/github/languages/top/KeyiaFR/Flux_video_H7p?style=plastic)
 
 
 
@@ -55,7 +55,7 @@ To install and use the injection of flux video:
 
 1. Clone the gitHub repository: 
 
-	git clone :::
+	< git clone https://github.com/KeyiaFR/Flux_video_H7p.git >
 
 2. Take a video in format .mjpeg
 
