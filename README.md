@@ -81,7 +81,7 @@ Flux video in H7 plus is built with the following tools and libraries: <ul><li>P
  
 Here are step-by-step instructions for using the flux video in H7+ board:
 
-0. It's mandatory to flash a firmware newer than 4.5.2 to H7+ board, to date 20 fev. 2024 this firmware is deployed in development version. To do that refers to: https://forums.openmv.io/t/how-to-upgrade-to-latest-firmware-openmv-h7/1523
+0. It's mandatory to flash a firmware newer than 4.5.2 to H7+ board, to date 20 fev. 2024 this firmware is deployed in development version it's the file ".zip" joint. To do that refers to: https://forums.openmv.io/t/how-to-upgrade-to-latest-firmware-openmv-h7/1523
 
 1. You must change the extension from ".mjpeg" to ".mp4"
 	- Right click choose rename
