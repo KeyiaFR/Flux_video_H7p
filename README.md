@@ -101,7 +101,7 @@ Here are step-by-step instructions for using the flux video in H7+ board:
 Here you have all the images in the format to simulate one scenario.
 5. In this repository you have an exemple like Strigoo were used, if you execute "resulGenerationv2.py" you will see a video named "Result2.mjpeg" where all the frames processed are stored. 
 
-
+NOTE: This scripts use experimental functionalities from development firmware. If there is an error or unexpected behavior in "resultGeneration.py" execution, try to change a little bit the find_blobs function parameters to have less indivudals blobs. Like increase "margin", and reduce "blobAreaThreshold" parameter. The "resultGenerationModifie.py" script shows an exemple of application to modify Strigoo Algorithm original and test in a test video.  
 
 
 
