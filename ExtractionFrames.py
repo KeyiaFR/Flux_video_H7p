@@ -35,13 +35,14 @@ while avi.avi_info['cur_img'] < avi.avi_info['total_frame']:
 
 avi.avi_info['cur_img'] = 0
 
-files=os.listdir("/frames_analyse")
-jpegs=[files for files in files if "jpeg" in files]
-print(jpegs)
-for jpeg in jpegs:
-    print(jpeg)
-    stream = image.ImageIO("/frames_analyse/"+jpeg, "r")
-    img = stream.read(copy_to_fb=True, loop=True, pause=True)
-    img.save("/frames_analyse/"+jpeg)
+dir_path = "/frames_analyse"
+
+for file in os.ilistdir(dir_path):
+    file_name = file[0]
+    if file_name.endswith(".jpeg"):
+        print(file_name)
+        stream = image.ImageIO("/frames_analyse/"+file_name, "r")
+        img = stream.read(copy_to_fb=True, loop=True, pause=True)
+        img.save("/frames_analyse/"+file_name)
 
 
