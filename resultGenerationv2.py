@@ -309,7 +309,10 @@ for i in range(1, len(bmps)):
 
 
     print("memoire free: ",gc.mem_free())
-
+    #Add circles to image video
+    img_diff_bin.draw_circle((295,310,104),color=255,thickness=2, fill=False) ## Change radius, in this case radius for 5m is 104
+    img_diff_bin.draw_circle((295,310,417//2),color=255,thickness=2) #10 m
+    img_diff_bin.draw_circle((295,310,652//2),color=255,thickness=2) #15 m
     # Add frame to video
     m.add_frame(img_diff_bin)
     print("frames in video: ", m.count())
