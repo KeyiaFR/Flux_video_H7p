@@ -95,10 +95,10 @@ def PreProcessing(imgpro):
     #source: https://docs.openmv.io/library/omv.image.html#image.Image.mean
 
 
-    imgpro.close(2,12)
-    imgpro.dilate(5,9)
+    imgpro.close(ksize=2,threshold=12)
+    imgpro.dilate(ksize=5,threshold=9)
     #imgpro.erode(1,5)
-    imgpro.open(1)
+    imgpro.open(ksize=1)
 
     #To developer: the next preprocessing could be used, the results for blob detection it's better but it's slower
     #              to use decomment line for bilateral filter and replace previous morfologic operations for next one
@@ -278,7 +278,7 @@ gainComputed = 0                                                                
 objectDetected = "Null"																   		# Nature of object / No item Detected at start
 
 
-m = mjpeg.Mjpeg("Result_modifie.mjpeg")  #Result file
+m = mjpeg.Mjpeg("Strigoo_Modifie_Toulouse1_1.mjpeg")  #Result file
 print("File name: Result_modifie.mjpeg")
 
 files = os.listdir("/frames_bmp")
@@ -289,7 +289,11 @@ print(bmps)
 img_ref = sensor.alloc_extra_fb(640, 360, sensor.GRAYSCALE)
 
 for i in range(1, len(bmps)):
+    imgBlobList = [[]]                                                                     		# List of image containing Blobs list used to calculate speed vector
+    blobValidList = []                                                                     		# List of image containing Blobs list used to calculate speed vector
+    blobValidListTmp =[]
     print(f"frames: {i-1} - {i}")
+    gc.collect()
     clock.tick()
 
     img_ref.replace(image.Image("/frames_bmp/" + bmps[i-1], copy_to_fb=True))
@@ -390,10 +394,12 @@ for i in range(1, len(bmps)):
         img.draw_string(0, 0, "No detection")
         img_diff_bin.draw_string(0, 0, "No detection")
 
-
-
-
     print("memoire free: ",gc.mem_free())
+
+    #Add circles to image video
+    img_diff_bin.draw_circle((296,285,104),color=255,thickness=2, fill=False) ## Change radius, in this case radius for 5m is 104
+    img_diff_bin.draw_circle((296,285,417//2),color=255,thickness=2) #10 m
+    img_diff_bin.draw_circle((296,285,652//2),color=255,thickness=2) #15 m
 
     # Add frame to video
     m.add_frame(img_diff_bin)

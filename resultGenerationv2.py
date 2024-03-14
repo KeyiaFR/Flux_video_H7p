@@ -1,4 +1,4 @@
-import sensor, image, time, mjpeg, os, gc, pyb, math
+import sensor, image, time, mjpeg, os, gc, machine, math
 from config import *
 
 #****************************************************
@@ -187,7 +187,7 @@ imgBlobList = [[]]                                                              
 blobValidList = []                                                                     		# List of image containing Blobs list used to calculate speed vector
 blobValidListTmp =[]
 clock = time.clock()                                                                   		# Set variable to clock
-rtc = pyb.RTC()
+rtc = machine.RTC()
 rtc.datetime((2000, 1, 1, 1, 0, 0, 0, 0))
 cptFileName = 0;                                                                       		# Counter computed by getfileName method and used for videos filenames
 sdCardPresentFlag = False
@@ -200,8 +200,8 @@ gainComputed = 0                                                                
 objectDetected = "Null"																   		# Nature of object / No item Detected at start
 
 
-m = mjpeg.Mjpeg("Result2.mjpeg")  #Result file
-print("Nombre del archivo: Result2.mjpeg")
+m = mjpeg.Mjpeg("Strigoo_Toulouse1_2.mjpeg")  #Result file
+print("Nombre del archivo: StrigooToulouse1_1.mjpeg")
 
 files = os.listdir("/frames_bmp")
 bmps = [file for file in files if "bmp" in file]
@@ -211,7 +211,11 @@ print(bmps)
 img_ref = sensor.alloc_extra_fb(640, 360, sensor.GRAYSCALE)
 
 for i in range(1, len(bmps)):
+    imgBlobList = [[]]                                                                     		# List of image containing Blobs list used to calculate speed vector
+    blobValidList = []                                                                     		# List of image containing Blobs list used to calculate speed vector
+    blobValidListTmp =[]
     print(f"frames: {i-1} - {i}")
+    gc.collect()
     clock.tick()
 
     img_ref.replace(image.Image("/frames_bmp/" + bmps[i-1], copy_to_fb=True))
@@ -249,7 +253,7 @@ for i in range(1, len(bmps)):
             img_diff_bin.draw_cross(blob.cx(), blob.cy(), color=colorDrawBlob)
             img_diff_bin.draw_string(blob.cx(),blob.cy() + 5, str(blob.area()))
 
-    print("final de for")
+
     if (validAreaBlobFound == True):                                        				# Fill blob validated list
         startBlobSeen = time.ticks_ms();                                   				    # Time reset to clear imgBlobList after a given time
         imgBlobList.append(blobValidList.copy())                            				# Add Valid Blobs to imgBlobList  Note : copy used to not clear imgBlobList when blobValidList is cleared
@@ -309,10 +313,13 @@ for i in range(1, len(bmps)):
 
 
     print("memoire free: ",gc.mem_free())
+
     #Add circles to image video
-    img_diff_bin.draw_circle((295,310,104),color=255,thickness=2, fill=False) ## Change radius, in this case radius for 5m is 104
-    img_diff_bin.draw_circle((295,310,417//2),color=255,thickness=2) #10 m
-    img_diff_bin.draw_circle((295,310,652//2),color=255,thickness=2) #15 m
+    img_diff_bin.draw_circle((296,285,104),color=255,thickness=2, fill=False) ## Change radius, in this case radius for 5m is 104
+    img_diff_bin.draw_circle((296,285,417//2),color=255,thickness=2) #10 m
+    img_diff_bin.draw_circle((296,285,652//2),color=255,thickness=2) #15 m
+
+
     # Add frame to video
     m.add_frame(img_diff_bin)
     print("frames in video: ", m.count())
@@ -320,3 +327,5 @@ for i in range(1, len(bmps)):
 # Close video
 m.close()
 print("Closed file: ",m.is_closed())
+
+
